@@ -9,12 +9,12 @@ This repository provides a scripted walkthrough for moving an Azure Kubernetes S
 
 Each stage below references the accompanying demo script so you can test the migration end-to-end or jump into a specific phase.
 
->![IMPORTANT]
+> [!IMPORTANT]
 > * The sample script are for implemented when you [bring your own deployment for the creation of the Application Gateway for Containers (AGC)](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/quickstart-create-application-gateway-for-containers-byo-deployment?tabs=existing-vnet-subnet). You can adapt them to [create AGC that is managed by the ALB Controller](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/quickstart-create-application-gateway-for-containers-managed-by-alb-controller?tabs=new-subnet-aks-vnet).
 > * The scripts are designed for demonstration purposes and may require adjustments for production use, including enhanced error handling, security practices, and environment-specific configurations.
 > * The script is using the virtual network of the AKS cluster. You can also bring your own virtual network. In that case, make sure to adapt the scripts accordingly.
 
->![NOTE]
+> [!NOTE]
 > * There are other strategies to migrate from NGINX to AGC, such as blue-green deployments. Instead of deploying a second ingress controller alongside NGINX, you could set up a parallel AGC environment and switch traffic over once validated. This approach may suit scenarios where zero-downtime cutover is critical, where the existing cluster cannot accommodate for the deployment of AGC, or where immutable deployment practices are in place. If you decide to follow this strategy there are 2 scripts to deploy AKS cluster with AGC: [agc-01-deploy-aks-with-agc.sh](./agc-01-deploy-aks-with-agc.sh) and [agc-02-deploy-test-application.sh](./agc-02-deploy-test-application.sh).
 > * This guide assumes familiarity with AKS, Kubernetes ingress concepts, and Azure networking. Ensure you have the necessary permissions to create and manage resources in your Azure subscription.
 > * This migration from NGINX to AGC is tranlating traffic management using Ingress API to AGC traffic management using Ingress API. It is important to consider if the translation is the right approach or if you should use the Gateway API instead. Read carefully the [documentation](https://learn.microsoft.com/en-us/azure/aks/concepts-network-ingress#compare-ingress-options) to choose the right ingress and API for your scenario.
